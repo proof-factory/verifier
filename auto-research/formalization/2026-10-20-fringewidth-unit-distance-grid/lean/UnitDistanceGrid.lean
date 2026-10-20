@@ -108,12 +108,11 @@ theorem rotate_second (r₁ r₂ U₁ U₂ : F × F) (hv : dot (r₂ - r₁) (r�
   obtain ⟨w1, w2⟩ := U₂
   simp only [gauge, transOf, rotOf, tauOf, dot, J, Prod.mk_sub_mk, Prod.smul_mk,
     smul_eq_mul, one_mul] at hv ⊢
+  have hι := mul_inv_cancel₀ hv
   rw [Prod.mk.injEq]
   constructor
-  · field_simp
-    ring
-  · field_simp
-    ring
+  · linear_combination (-(w1 - u1)) * hι
+  · linear_combination (-(w2 - u2)) * hι
 
 /-- §1, eq. (normalized): one gauge map sends `U₁` to `0` and `U₂` to `0` or to
 `v = r₂ - r₁`, provided `v · v ≠ 0`. -/
@@ -189,12 +188,11 @@ theorem collinear_parallel (r₁ r₂ rℓ U₁ U₂ Uℓ : F × F) (σ dσ : F)
   obtain ⟨w1, w2⟩ := U₂
   simp only [gauge, transOf, rotOf, tauOf, dot, J, Prod.mk_sub_mk, Prod.mk_add_mk,
     Prod.smul_mk, smul_eq_mul, one_mul] at hv ⊢
+  have hι := mul_inv_cancel₀ hv
   rw [Prod.mk.injEq]
   constructor
-  · field_simp
-    ring
-  · field_simp
-    ring
+  · linear_combination (-(σ * (w1 - u1))) * hι
+  · linear_combination (-(σ * (w2 - u2))) * hι
 
 end Plane
 
@@ -268,7 +266,7 @@ degree exactly `d`. -/
 theorem surviving_point {N d cost : ℕ} (f : Fin N → ℕ) (hle : ∀ i, f i ≤ d)
     (hsum : N * d ≤ (∑ i, f i) + cost) (hcost : cost < N) : ∃ i, f i = d := by
   by_contra h
-  push_neg at h
+  simp only [not_exists] at h
   have hlt : ∀ i, f i + 1 ≤ d := fun i => lt_of_le_of_ne (hle i) (h i)
   have hs : ∑ i, (f i + 1) ≤ ∑ _i : Fin N, d := Finset.sum_le_sum fun i _ => hlt i
   simp only [Finset.sum_add_distrib, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
