@@ -1,0 +1,14 @@
+name: udg-lean
+on:
+  push:
+    branches: [ci/udg-lean]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+      - run: echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: bash auto-research/formalization/2026-10-20-fringewidth-unit-distance-grid/verify.sh
