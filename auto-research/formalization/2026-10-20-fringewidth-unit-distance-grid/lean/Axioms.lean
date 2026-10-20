@@ -1,0 +1,23 @@
+import UnitDistanceGrid
+
+#print axioms UnitDistanceGrid.dot_J_self
+gauge_residual
+gauge_sysEq_iff
+gauge_sub_ne_zero_iff
+rotate_first
+rotate_second
+normalization
+written_translation
+written_translation_counterexample
+sysEq_iff_linear
+collinear_velocity
+collinear_parallel
+fixed_of_unique
+sign_flip
+rank_two_step
+common_line_det
+surviving_point
+surviving_point_sharp
+generator_budget
+grid_counts
+general_grid_survives
