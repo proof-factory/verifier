@@ -37,7 +37,7 @@ bash auto-research/formalization/2026-10-20-fringewidth-unit-distance-grid/verif
 The script needs `elan` on `PATH`. It downloads the Mathlib cache for the pinned commit, builds the file and runs `#print axioms` on every theorem. The last line of the expected output is:
 
 ```
-OK: 21 theorems checked; axioms within {propext, Classical.choice, Quot.sound}
+OK: 23 theorems checked; axioms within {propext, Classical.choice, Quot.sound}
 ```
 
 Pins: Lean `v4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612` (the same Mathlib as `profiles/lake-manifest.json`). The build ran in GitHub Actions on the fork `fringewidth/verifier`, branch `ci/udg-lean`.

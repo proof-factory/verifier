@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/lean"
 lake exe cache get
 lake build
-out="$(lake env lean Axioms.lean 2>&1)" || { printf '%s\n' "$out"; echo "FAIL: Axioms.lean did not compile"; exit 1; }
+out="$(lake env lean Axioms.lean)"
 printf '%s\n' "$out"
 count="$(printf '%s\n' "$out" | grep -c "depends on axioms\|does not depend on any axioms" || true)"
 expected="$(grep -c '^#print axioms' Axioms.lean)"
